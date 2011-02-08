@@ -24,16 +24,15 @@ requires = [
     'pyramid>=1.0a7',
     'repoze.tm2',
     'repoze.monty',
-    'ZODB3',
+    'zope.sqlalchemy',
+    'SQLAlchemy',
     'Pygments',
     'FormEncode',
-    'repoze.zodbconn',
-    'repoze.folder',
     ]
 
 __version__ = '0.0'
 
-setup(name='cluegun',
+setup(name='hybridauth',
       version=__version__,
       description='A Pyramid sample application: pastebin (based on ClueBin)',
       long_description=README + '\n\n' +  CHANGES,
@@ -56,10 +55,10 @@ setup(name='cluegun',
       zip_safe=False,
       tests_require = requires,
       install_requires= requires,
-      test_suite="cluegun.tests",
+      test_suite="hybridauth.tests",
       entry_points = """\
       [paste.app_factory]
-      main = cluegun:main
+      main = hybridauth:main
       """
       )
 

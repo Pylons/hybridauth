@@ -1,6 +1,4 @@
 Next release
 ------------
 
-- Changed to disuse repoze.who and use decorators instead of ZCML.
-
-- Forked from repoze.cluebin after 0.1.  
+- ...

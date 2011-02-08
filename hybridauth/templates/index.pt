@@ -22,7 +22,7 @@
 
       <div class="left">
 
-        <form action="." method="POST">
+        <form action="${bin_url}" method="POST">
           <input type="hidden" name="form.submitted"/>
           <fieldset>
             <legend>Paste Info</legend>

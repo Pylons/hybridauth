@@ -20,7 +20,7 @@
         
         <style tal:content="style_defs"></style>
         
-        <a href="..">Main page</a>
+        <a href="${bin_url}">Main page</a>
         
         <dl class="previous_paste">
           <dt>Paste Entry</dt>

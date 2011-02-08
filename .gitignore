@@ -12,4 +12,4 @@ jyenv/
 pypyenv/
 build/
 dist/
-cluegun.db*
+hybridauth.db*

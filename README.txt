@@ -1,4 +1,5 @@
-An implementation of Rocky Burt's ClueBin based on Pyramid.
+An example of hybrid authentication in Pyramid.
+
 
 
 

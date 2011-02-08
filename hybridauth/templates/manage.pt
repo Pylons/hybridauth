@@ -20,11 +20,11 @@
 
         <fieldset>
           <legend>Delete Pastes</legend>
-          <form action="${application_url}/manage" method="POST">
+          <form action="${manage_url}" method="POST">
             <ul>
               <li tal:repeat="paste pastes">
                 <input type="checkbox" name="delete:list" 
-                   value="${paste.name}"/>
+                   value="${paste.id}"/>
                 <a href="${paste.url}"
                    >By: ${paste.author} on ${paste.date}</a>
               </li>

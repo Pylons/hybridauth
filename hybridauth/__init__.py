@@ -223,7 +223,7 @@ def get_pastes(bin, request, max):
             pdate = 'UNKNOWN'
         paste_url = request.route_url('entry', bin=bin, entry=entry.id)
         new = {'author':entry.author_name, 'date':pdate, 'url':paste_url,
-               'name':name}
+               'name':name, 'id':entry.id}
         pastes.append(new)
     return pastes
 
@@ -360,12 +360,12 @@ def manage_view(request):
         checkboxes = form.get('delete', [])
         for name in checkboxes:
             entry_id = int(name)
-            entry = DBSession.query(Entry).filter(id=entry_id).one()
+            entry = DBSession.query(Entry).filter(Entry.id==entry_id).one()
             # remove security node
             del request.context[name]
             # remove entry
             DBSession.delete(entry)
-        return HTTPFound(location=app_url)
+        return HTTPFound(location=request.route_url('bin', bin=bin))
 
     pastes = get_pastes(bin, request, sys.maxint)
 
@@ -373,6 +373,7 @@ def manage_view(request):
         version = app_version,
         pastes = pastes,
         application_url = app_url,
+        manage_url = request.route_url('manage', bin=bin),
         )
         
 @view_config(context=Forbidden, renderer='hybridauth:templates/login.pt')

@@ -70,11 +70,14 @@ Base = declarative_base()
 
 class Resource(Base):
     __tablename__ = 'resource'
+    __table_args__ = (sa.UniqueConstraint('parent_id', 'name'), {})
 
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String(255), nullable=False)
     parent_id = sa.Column(sa.Integer, sa.ForeignKey('resource.id'))
+    
     _aces = relation('ACE')
+    __parent__ = relation('Resource', remote_side=[id], backref='children')
 
     def __init__(self, name, parent_id=None):
         self.name = name
@@ -103,17 +106,9 @@ class Resource(Base):
 
     __acl__ = property(_get_acl, _set_acl)
 
-    @property
-    def __parent__(self):
-        try:
-            return DBSession.query(Resource).filter(
-                Resource.id==self.parent_id).one()
-        except NoResultFound:
-            return None
-
     def _getOne(self, name):
-        return DBSession.query(Resource).filter(
-            Resource.parent_id==self.id).filter(Resource.name==name).one()
+        return DBSession.query(Resource).filter_by(parent_id=self.id,
+                                                   name=name).one()
 
     def __getitem__(self, name):
         try:
@@ -159,6 +154,7 @@ class Entry(Base):
     text = sa.Column(sa.Text(), nullable=False)
     language = sa.Column(sa.String(255), nullable=False)
     date = sa.Column(sa.DateTime(), nullable=False)
+
     def __init__(self, bin_name, author_name, text, language):
         self.author_name = author_name
         self.text = text

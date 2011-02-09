@@ -1,0 +1,1 @@
+select * from ace inner join resource on (resource.id=ace.resource_id) where resource_id=4;

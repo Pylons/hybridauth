@@ -148,7 +148,6 @@ class Entry(Base):
     __tablename__ = 'entry'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    resource_id = sa.Column(sa.Integer, sa.ForeignKey('resource.id'))
     bin_name = sa.Column(sa.String(255), nullable=False)
     author_name = sa.Column(sa.String(255), nullable=False)
     text = sa.Column(sa.Text(), nullable=False)
